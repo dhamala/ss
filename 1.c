@@ -11,7 +11,7 @@ fp3=fopen("out.dat","w");
 fp4=fopen("optab.dat","r");
 fscanf(fp1,"%s%s%s",label,opcode,operand);
 if(strcmp(opcode,"START")==0){
-start = atoi (operand);
+start=atoi(operand);
 locctr=start;
 fprintf(fp3,"\t%s\t%s\t%s\n",label,opcode,operand);
 fscanf(fp1,"%s%s%s",label,opcode,operand);
@@ -54,3 +54,21 @@ fclose(fp2);
 fclose(fp3);
 fclose(fp4);
 }
+INPUT FILES---INPUT.DAT
+** START 2000
+** LDA FIVE
+** STA ALPHA
+** LDCH CHARZ
+** STCH C1
+ALPHA RESW 1
+FIVE WORD 5
+CHARZ BYTE C’Z’
+C1 RESB 1
+** END **
+OPTAB.DAT
+START
+LDA
+STA
+LDCH
+STCH
+END
