@@ -1,0 +1,55 @@
+Lex File:
+%{
+#include "y.tab.h"
+%}
+%%
+[a-zA-Z]+
+{
+[0-9]*
+{
+.
+{
+%%
+int yywrap(void)
+{
+return 1;
+}
+return LETTER;
+return DIGIT;
+return yytext[0];
+Yacc File:
+%{
+#include<stdio.h>
+%}
+%token LETTER DIGIT
+%%
+S:LETTER
+| S DIGIT
+| S LETTER;
+%%
+main()
+{
+printf("Enter a variable\n");
+yyparse();
+printf("Valid Variable\n");
+}
+yyerror()
+{
+}
+}
+}printf("Invalid variable\n");
+exit(0);
+}
+Execution and Output:
+$ lex prog4b.l
+$ yacc –d prog4b.y
+$ cc lex.yy.c y.tab.c –ll
+$ ./a.out
+shravan@ubuntu:~/ss_final/yacc$ ./a.out
+Enter a variable
+dhgtvhjhg675
+Valid Variable
+shravan@ubuntu:~/ss_final/yacc$ ./a.out
+Enter a variable
+5767gfvhh
+Invalid variable
