@@ -1,0 +1,50 @@
+%{
+#include<stdio.h>
+#include "y.tab.h"
+%}
+%%
+[a-zA-Z0-9]+ {
+.
+{
+%%
+int yywrap(void)
+{
+return 1;
+}
+Yacc File:
+return ID;
+return yytext[0];
+}
+}%{
+#include<stdio.h>
+%}
+%token ID
+%left '+' '-' '*' '/'
+%%
+E:E'+'E
+|E '-' E
+|E '*' E
+|E '/' E
+|ID ;
+%%
+main()
+{
+printf("Enter an arithmetic expression\n");
+yyparse();
+printf("Valid expression\n");
+}
+yyerror()
+{
+printf("Invalid expression\n");
+exit(0);
+}
+Execution and Output:
+shravan@ubuntu:~/ss_final/yacc$ gedit lex1.l
+shravan@ubuntu:~/ss_final/yacc$ gedit yacc1.y
+shravan@ubuntu:~/ss_final/yacc$ lex lex1.l
+shravan@ubuntu:~/ss_final/yacc$ yacc -d yacc1.y
+shravan@ubuntu:~/ss_final/yacc$ cc lex.yy.c y.tab.c -ll
+shravan@ubuntu:~/ss_final/yacc$ ./a.out
+Enter an arithmetic expression
+a+b-c
+Valid expression
